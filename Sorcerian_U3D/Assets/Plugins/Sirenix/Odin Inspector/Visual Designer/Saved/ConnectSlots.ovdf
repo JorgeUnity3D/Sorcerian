@@ -1,0 +1,50 @@
+OVDF v1.0
+ConnectSlots, Assembly-CSharp
+
+# $XSCEuC5H3sYNGLyiGe9fYT
+Position: $root:0
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Settings"
+
+# $6q5vDUByZRFv8sz8hKFD8K
+Position: $XSCEuC5H3sYNGLyiGe9fYT:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $39FU75djRxKyyGaR3WGaBW
+Position: $6q5vDUByZRFv8sz8hKFD8K:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $M74Xw3mMYXzo7PyRoNjMu7
+Position: $6q5vDUByZRFv8sz8hKFD8K:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $KktP7ypd39VqEtxFJM2eHr
+Position: $root:3
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Data"
+
+# _columns
+Position: $39FU75djRxKyyGaR3WGaBW:0
+
+# _rows
+Position: $M74Xw3mMYXzo7PyRoNjMu7:0
+
+# _slotSprites
+Position: $XSCEuC5H3sYNGLyiGe9fYT:2
+Visibility: Shown
+
+# _slots
+Position: $KktP7ypd39VqEtxFJM2eHr:0
+Visibility: Shown
+
+# GenerateRandomGrind
+Visibility: Hidden
+
+# GenerateVisualGrid
+Visibility: Hidden
+
+# InitializeData
+Visibility: Hidden
+
+# Start
+Visibility: Shown

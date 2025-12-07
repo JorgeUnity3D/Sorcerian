@@ -1,0 +1,133 @@
+OVDF v1.0
+Kapibara.ConnectSlots.BoardController, Assembly-CSharp
+
+# $GEJ5meFpfZjE7SvNjKp9F2
+Position: $U7AuvaxAguWNyRuKUs5fw2:1
++ [Sirenix.OdinInspector.TabGroupAttribute]
+	GroupName = "Distances"
+
+# $RiULsa72R2fyW4omhLUy56
+Position: $GEJ5meFpfZjE7SvNjKp9F2:0
++ [Sirenix.OdinInspector.TabGroupAttribute+TabSubGroupAttribute]
+	GroupName = "Distance 1"
+
+# $U7AuvaxAguWNyRuKUs5fw2
+Position: $root:13
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Tests"
+
+# $EUvR7r5rxCZ7YmS6Urfkq5
+Position: $RiULsa72R2fyW4omhLUy56:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $AEfLEQVDBwpgKZY9qxrnze
+Position: $EUvR7r5rxCZ7YmS6Urfkq5:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $CrVxaASgvhGisGmxffcsJw
+Position: $EUvR7r5rxCZ7YmS6Urfkq5:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $XBX8HB3PvegPX4hd1cPaYm
+Position: $U7AuvaxAguWNyRuKUs5fw2:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $37ivsbN63QSQTSTNJ9dU6W
+Position: $XBX8HB3PvegPX4hd1cPaYm:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $CrscJZ3htJeuoVdnZs6fi6
+Position: $XBX8HB3PvegPX4hd1cPaYm:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $FDcYVQZrKPV2hhUeMPv4EE
+Position: $XBX8HB3PvegPX4hd1cPaYm:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# ValidateBoard
+Visibility: Hidden
+
+# TestOrthogonal1
+Position: $9isxjX5BGmt74wrftAbbUT:1
+Visibility: Shown
+
+# TestDiagonal1
+Position: $UvCiZotLsmPhgXuDJqybWL:1
+Visibility: Shown
+
+# TestHorizontal1
+Position: $9isxjX5BGmt74wrftAbbUT:0
+Visibility: Shown
+
+# TestVertical1
+Position: $UvCiZotLsmPhgXuDJqybWL:0
+Visibility: Shown
+
+# TestOrthogonal2
+Position: $5UiXtJYAMDA9nJYXhAUSfT:1
+Visibility: Shown
+
+# TestDiagonal2
+Position: $DrKEKWKvujGjnThkrA9iz5:1
+Visibility: Shown
+
+# TestHorizontal2
+Position: $DrKEKWKvujGjnThkrA9iz5:0
+Visibility: Shown
+
+# TestVertical2
+Position: $5UiXtJYAMDA9nJYXhAUSfT:0
+Visibility: Shown
+
+# CleanHighlights
+Position: $U7AuvaxAguWNyRuKUs5fw2:2
+Visibility: Shown
+
+# TestNeighbor1
+Position: $RiULsa72R2fyW4omhLUy56:1
+Visibility: Shown
+
+# TestNeighbor2
+Position: $BjzAMcEWVPNLxZFLpFyDAC:1
+Visibility: Shown
+
+# TestHorizontal
+Position: $AEfLEQVDBwpgKZY9qxrnze:0
+Visibility: Shown
+
+# TestVertical
+Position: $CrVxaASgvhGisGmxffcsJw:0
+Visibility: Shown
+
+# TestOrthogonal
+Position: $AEfLEQVDBwpgKZY9qxrnze:1
+Visibility: Shown
+
+# TestDiagonal
+Position: $CrVxaASgvhGisGmxffcsJw:1
+Visibility: Shown
+
+# TestNeighbor
+Position: $RiULsa72R2fyW4omhLUy56:1
+Visibility: Shown
+
+# _testRow
+Position: $37ivsbN63QSQTSTNJ9dU6W:0
+
+# _testColumn
+Position: $FDcYVQZrKPV2hhUeMPv4EE:0
+
+# _testDistance
+Position: $CrscJZ3htJeuoVdnZs6fi6:0
+
+# _slotSprites
++ [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 0
+	FilterMode = Bilinear
++ [Sirenix.OdinInspector.ListDrawerSettingsAttribute]
+	ListElementLabelName = "name"
+
+# _board
+Position: $root:14
+Visibility: Hidden
++ [Sirenix.OdinInspector.ListDrawerSettingsAttribute]
