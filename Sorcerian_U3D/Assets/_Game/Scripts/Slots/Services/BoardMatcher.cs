@@ -1,19 +1,11 @@
 using System.Collections.Generic;
+using VContainer;
 
 namespace Kapibara.ConnectSlots
 {
     public class BoardMatcher
     {
-        private Slot[,] _board;
-        private int _rows;
-        private int _columns;
-
-        public BoardMatcher(Slot[,] board, int rows, int columns)
-        {
-            _board = board;
-            _rows = rows;
-            _columns = columns;
-        }
+        [Inject] private Board _board;
 
         #region MATCH CHECK
         
@@ -22,14 +14,14 @@ namespace Kapibara.ConnectSlots
             List<Slot> result = new List<Slot>();
 
             // Check all rows
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
                 List<Slot> rowMatches = BoardUtils.CheckMatchesInRow(_board, r, minMatch);
                 AddUnique(result, rowMatches);
             }
 
             // Check all columns
-            for (int c = 0; c < _columns; c++)
+            for (int c = 0; c < _board.Columns; c++)
             {
                 List<Slot> columnMatches = BoardUtils.CheckMatchesInColumn(_board, c, minMatch);
                 AddUnique(result, columnMatches);

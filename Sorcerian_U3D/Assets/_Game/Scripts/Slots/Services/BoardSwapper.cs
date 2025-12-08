@@ -1,19 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
+using VContainer;
 
 namespace Kapibara.ConnectSlots
 {
     public class BoardSwapper
     {
-        private Slot[,] _board;
-        private BoardView _boardView;
-
-        public BoardSwapper(Slot[,] board, BoardView boardView)
-        {
-            _board = board;
-            _boardView = boardView;
-        }
+        [Inject] private Board _board;
+        [Inject] private BoardView _boardView;
         
         #region SLOT SWAP LOGIC
         

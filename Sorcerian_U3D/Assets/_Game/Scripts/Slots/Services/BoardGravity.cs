@@ -1,20 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine;
+using VContainer;
 
 namespace Kapibara.ConnectSlots
 {
     public class BoardGravity
     {
-        private Slot[,] _board;
-        private int _rows;
-        private int _columns;
-
-        public BoardGravity(Slot[,] board, int rows, int columns)
-        {
-            _board = board;
-            _rows = rows;
-            _columns = columns;
-        }
+        [Inject] private Board _board;
 
         /*
          *      132     XXX     132                 132
@@ -35,15 +26,14 @@ namespace Kapibara.ConnectSlots
          *          sB 1 - nB 2 - auxRow 3 =>
          *          sB 1 - nB 3 - auxRow 4 =>
          *      1(3,0) ->
-         * 
+         *
          */
-
         public List<SlotMovement> CalculateGravityMovements()
         {
             List<SlotMovement> movements = new List<SlotMovement>();
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
-                for (int c = 0; c < _columns; c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     Slot slot = _board[r, c];
                     if (slot != null && !slot.IsDestroyed)
@@ -51,7 +41,7 @@ namespace Kapibara.ConnectSlots
                         int auxRow = r + 1;
                         int slotsBelow = 0;
                         bool hasMovement = false;
-                        while (auxRow < _rows)
+                        while (auxRow < _board.Rows)
                         {
                             if (_board[auxRow, c].IsDestroyed)
                             {
@@ -61,13 +51,15 @@ namespace Kapibara.ConnectSlots
                             {
                                 slotsBelow++;
                             }
+
                             auxRow++;
                         }
 
                         if (hasMovement)
                         {
                             //Slot targetSlot = _board[auxRow - slotsBelow - 1, c];
-                            movements.Add(new SlotMovement(slot, auxRow - slotsBelow - 1, c));//,auxRow - slotsBelow - 1, c));
+                            movements.Add(new SlotMovement(slot, auxRow - slotsBelow - 1,
+                                c)); //,auxRow - slotsBelow - 1, c));
                         }
                     }
                 }

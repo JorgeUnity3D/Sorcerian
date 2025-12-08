@@ -1,33 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
+using VContainer;
 
 namespace Kapibara.ConnectSlots
 {
     public class BoardView : MonoBehaviour
     {
-        [SerializeField] private GameObject _slotPrefab;
-        [SerializeField] private Transform _parent;
-
-        [SerializeField] private float _sizeX = 1f;
-        [SerializeField] private float _sizeY = 1f;
-
-        [SerializeField] private float _moveDuration = 0.5f;
-        [SerializeField] private float _stepDelay = 0.5f;
-
-        private Slot[,] _board;
+        [Inject] private Board _board;
+        [Inject] private BoardConfig _boardConfig;
 
         #region BOARD BUILDING
 
-        public void GenerateBoardView(Slot[,] board, UnityAction<Slot> onSlotClick)
+        public void GenerateBoardView(UnityAction<Slot> onSlotClick)
         {
-            _board = board;
-            int rows = _board.GetLength(0);
-            int cols = _board.GetLength(1);
+            int rows = _board.Rows;
+            int cols = _board.Columns;
 
             for (int r = 0; r < rows; r++)
             {
@@ -40,15 +30,15 @@ namespace Kapibara.ConnectSlots
 
         private void InstantiateSlot(Slot slot, UnityAction<Slot> onSlotClick)
         {
-            GameObject instance = Instantiate(_slotPrefab, _parent);
-            instance.transform.localScale = new Vector3(_sizeX, _sizeY, 1f);
+            GameObject instance = Instantiate(_boardConfig.SlotPrefab, _boardConfig.SlotsParent);
+            instance.transform.localScale = new Vector3(_boardConfig.SizeX, _boardConfig.SizeY, 1f);
 
             SpriteRenderer sr = instance.GetComponent<SpriteRenderer>();
             sr.sprite = slot.Sprite;
 
             // Calculate sprite size
             Vector2 spriteSize = sr.sprite.bounds.size;
-            Vector2 scaledSize = new Vector2(spriteSize.x * _sizeX, spriteSize.y * _sizeY);
+            Vector2 scaledSize = new Vector2(spriteSize.x * _boardConfig.SizeX, spriteSize.y * _boardConfig.SizeY);
 
             // Position in grid
             instance.transform.localPosition = CalculatePosition(slot.Row, slot.Column, scaledSize);
@@ -107,7 +97,7 @@ namespace Kapibara.ConnectSlots
         {
             List<Sequence> sequences = new List<Sequence>();
 
-            int rows = _board.GetLength(0);
+            int rows = _board.Rows;
 
             foreach (SlotMovement movement in slotMovements)
             {
@@ -129,15 +119,15 @@ namespace Kapibara.ConnectSlots
                     int nextRow = currentRow + stepDir;
 
                     Sprite sprite = slot.SlotInstance.GetComponent<SpriteRenderer>().sprite;
-                    Vector2 scaledSize = new Vector2(sprite.bounds.size.x * _sizeX, sprite.bounds.size.y * _sizeY);
+                    Vector2 scaledSize = new Vector2(sprite.bounds.size.x * _boardConfig.SizeX, sprite.bounds.size.y * _boardConfig.SizeY);
                     Vector3 nextPos = CalculatePosition(nextRow, slot.Column, scaledSize);
 
                     sequence.Append(
-                        slot.SlotInstance.transform.DOLocalMove(nextPos, _moveDuration).SetEase(Ease.OutQuad)
+                        slot.SlotInstance.transform.DOLocalMove(nextPos, _boardConfig.MoveDuration).SetEase(Ease.OutQuad)
                     );
 
                     if (i < steps - 1)
-                        sequence.AppendInterval(_stepDelay);
+                        sequence.AppendInterval(_boardConfig.StepDelay);
 
                     currentRow = nextRow;
                 }
@@ -197,8 +187,8 @@ namespace Kapibara.ConnectSlots
 
         public void ClearAllHighlights()
         {
-            for (var r = 0; r < _board.GetLength(0); r++)
-            for (var c = 0; c < _board.GetLength(1); c++)
+            for (var r = 0; r < _board.Rows; r++)
+            for (var c = 0; c < _board.Columns; c++)
             {
                 Slot slot = _board[r, c];
                 if (slot != null)

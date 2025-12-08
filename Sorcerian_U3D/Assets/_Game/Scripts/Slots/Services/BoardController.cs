@@ -2,50 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using VContainer;
 
 namespace Kapibara.ConnectSlots
 {
     public class BoardController : MonoBehaviour
     {
-        [SerializeField] private bool _testBoard;
-        [SerializeField] private int _rows = 3;
-        [SerializeField] private int _columns = 3;
-        [SerializeField] private Sprite[] _slotSprites;
+        [Inject] private BoardView _boardView;
+        [Inject] private BoardGenerator _boardGenerator;
+        [Inject] private BoardInputHandler _boardInputHandler;
+        [Inject] private BoardSwapper _boardSwapper;
+        [Inject] private BoardMatcher _boardMatcher;
+        [Inject] private BoardDestroyer _boardDestroyer;
+        [Inject] private BoardGravity _boardGravity;
+        [Inject] private BoardRefiller _boardRefiller;
+        [Inject] private Board _board;
+        [Inject] private BoardConfig _boardConfig;
 
-        private BoardGenerator _boardGenerator;
-        private BoardInputHandler _boardInputHandler;
-        [SerializeField] private BoardView _boardView;
-        private BoardSwapper _boardSwapper;
-        private BoardMatcher _boardMatcher;
-        private BoardDestroyer _boardDestroyer;
-        private BoardGravity _boardGravity;
-        private BoardRefiller _boardRefiller;
-
-        private Slot[,] _board;
         private List<Slot> _matches = new List<Slot>();
-        private int _destroyCount;
+
 
         private void Start()
         {
-            _boardGenerator = new BoardGenerator(_board, _rows, _columns, _slotSprites);
-            if (_testBoard)
-            {
-                _board = _boardGenerator.GenerateTestBoardData();
-            }
-            else
-            {
-                _board = _boardGenerator.GenerateBoardData();
-            }
+            _boardGenerator.GenerateBoardData();
+            _boardView.GenerateBoardView(_boardInputHandler.OnSlotClicked);
 
-            _boardInputHandler = new BoardInputHandler();
-            _boardView.GenerateBoardView(_board, _boardInputHandler.OnSlotClicked);
-            _boardSwapper = new BoardSwapper(_board, _boardView);
-            _boardMatcher = new BoardMatcher(_board, _rows, _columns);
-            _boardDestroyer = new BoardDestroyer(_boardView);
-            _boardGravity = new BoardGravity(_board, _rows, _columns);
-            _boardRefiller = new BoardRefiller(_board, _rows, _columns);
-
-            // Subscribe to input events
             _boardInputHandler.OnFirstSlotSelected += _boardView.HighlightSlot;
             _boardInputHandler.OnSecondSlotSelected += _boardView.HighlightSlot;
             _boardInputHandler.OnSwapRequested += OnSwapRequested;
@@ -111,14 +92,15 @@ namespace Kapibara.ConnectSlots
         private void ApplyGravity()
         {
             List<SlotMovement> slotMovements = _boardGravity.CalculateGravityMovements();
-            _boardSwapper.ApplyGravityInGrid(slotMovements, OnGravityApplied); //, () => { DebugBoard("ApplyGravity"); });
+            _boardSwapper.ApplyGravityInGrid(slotMovements,
+                OnGravityApplied); //, () => { DebugBoard("ApplyGravity"); });
         }
 
         private void OnGravityApplied()
         {
             CleanDestroyedSlots();
             DebugBoard("OnGravityApplied");
-            
+
             RegenerateBoardPositions();
             DebugBoard("RegenerateBoardPositions");
             RefillBoard();
@@ -130,12 +112,13 @@ namespace Kapibara.ConnectSlots
             DebugSlotMovementList("RefillBoardMovements", movements);
             _boardGenerator.RegenerateEmptySlotsData(movements);
             DebugSlotMovementList("RegenerateEmptySlotsData", movements);
-            
+
             _boardView.RegenerateEmptySlots(movements, _boardInputHandler.OnSlotClicked);
             DebugBoard("RegenerateEmptySlots");
             DebugSlotMovementList("RegenerateEmptySlots", movements);
-            
-            _boardSwapper.ApplyGravityInGrid(movements, OnBoardRefilled, () => { DebugBoard("OnNewSlotsGravityAnimationApplied"); });
+
+            _boardSwapper.ApplyGravityInGrid(movements, OnBoardRefilled,
+                () => { DebugBoard("OnNewSlotsGravityAnimationApplied"); });
         }
 
         private void OnBoardRefilled()
@@ -146,9 +129,9 @@ namespace Kapibara.ConnectSlots
 
         private void CleanDestroyedSlots()
         {
-            for (int r = 0; r < _board.GetLength(0); r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
-                for (int c = 0; c < _board.GetLength(1); c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     if (_board[r, c].IsDestroyed)
                     {
@@ -161,9 +144,9 @@ namespace Kapibara.ConnectSlots
 
         private void RegenerateBoardPositions()
         {
-            for (int r = 0; r < _board.GetLength(0); r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
-                for (int c = 0; c < _board.GetLength(1); c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     if (_board[r, c] != null)
                     {
@@ -186,12 +169,12 @@ namespace Kapibara.ConnectSlots
             // 1. PREPARAR TABLA DE TIPOS (sin color, para medir correctamente)
             // ============================================================
 
-            string[,] typeTable = new string[_rows, _columns];
-            int[] typeColWidths = new int[_columns];
+            string[,] typeTable = new string[_board.Rows, _board.Columns];
+            int[] typeColWidths = new int[_board.Columns];
 
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
-                for (int c = 0; c < _columns; c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     string raw =
                         _board[r, c] == null ? "-" :
@@ -209,12 +192,12 @@ namespace Kapibara.ConnectSlots
             // 2. PREPARAR TABLA DE POSICIONES (también sin color)
             // ============================================================
 
-            string[,] posTable = new string[_rows, _columns];
-            int[] posColWidths = new int[_columns];
+            string[,] posTable = new string[_board.Rows, _board.Columns];
+            int[] posColWidths = new int[_board.Columns];
 
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
-                for (int c = 0; c < _columns; c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     string raw =
                         _board[r, c] == null ? "(--,--)" :
@@ -234,13 +217,13 @@ namespace Kapibara.ConnectSlots
 
             sb.AppendLine("\n<b><color=#8888FF>TYPE TABLE</color></b>");
 
-            int totalTypeWidth = typeColWidths.Sum() + _columns * 3 + 1;
+            int totalTypeWidth = typeColWidths.Sum() + _board.Columns * 3 + 1;
             sb.AppendLine("+" + new string('-', totalTypeWidth) + "+");
 
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
                 sb.Append("|");
-                for (int c = 0; c < _columns; c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     string raw = typeTable[r, c].PadLeft(typeColWidths[c]);
 
@@ -263,13 +246,13 @@ namespace Kapibara.ConnectSlots
 
             sb.AppendLine("\n<b><color=#88FF88>POSITION TABLE</color></b>");
 
-            int totalPosWidth = posColWidths.Sum() + _columns * 3 + 1;
+            int totalPosWidth = posColWidths.Sum() + _board.Columns * 3 + 1;
             sb.AppendLine("+" + new string('-', totalPosWidth) + "+");
 
-            for (int r = 0; r < _rows; r++)
+            for (int r = 0; r < _board.Rows; r++)
             {
                 sb.Append("|");
-                for (int c = 0; c < _columns; c++)
+                for (int c = 0; c < _board.Columns; c++)
                 {
                     string raw = posTable[r, c].PadLeft(posColWidths[c]);
 
@@ -308,13 +291,14 @@ namespace Kapibara.ConnectSlots
             {
                 sb.AppendLine($"{slotMovement}");
             }
+
             Debug.Log(sb.ToString());
         }
-        
+
         #endregion
-        
+
         #region TESTS
-        
+
         [SerializeField] private int _testRow;
         [SerializeField] private int _testColumn;
         [SerializeField] private int _testDistance;

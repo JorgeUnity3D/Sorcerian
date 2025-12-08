@@ -26,16 +26,16 @@ namespace Kapibara.ConnectSlots
     {
         #region MATCH CHECKERS
 
-        public static List<Slot> CheckMatchesInRow(Slot[,] grid, int row, int minMatch)
+        public static List<Slot> CheckMatchesInRow(Board board, int row, int minMatch)
         {
             List<Slot> matches = new List<Slot>();
             
-            int columns = grid.GetLength(1);
+            int columns = board.Columns;
             int count = 1;
             
             for (int c = 1; c < columns; c++)
             {
-                if (grid[row, c].SlotType == grid[row, c - 1].SlotType)
+                if (board[row, c].SlotType == board[row, c - 1].SlotType)
                 {
                     count++;
                 }
@@ -45,7 +45,7 @@ namespace Kapibara.ConnectSlots
                     {
                         for (int k = 1; k <= count; k++)
                         {
-                            matches.Add(grid[row, c - k]);
+                            matches.Add(board[row, c - k]);
                         }
                     }
 
@@ -57,23 +57,23 @@ namespace Kapibara.ConnectSlots
             {
                 for (int k = 0; k < count; k++)
                 {
-                    matches.Add(grid[row, columns - 1 - k]);
+                    matches.Add(board[row, columns - 1 - k]);
                 }
             }
 
             return matches;
         }
 
-        public static List<Slot> CheckMatchesInColumn(Slot[,] grid, int column, int minMatch)
+        public static List<Slot> CheckMatchesInColumn(Board board, int column, int minMatch)
         {
             List<Slot> matches = new List<Slot>();
 
-            int rows = grid.GetLength(0);
+            int rows = board.Rows;
             int count = 1;
 
             for (int r = 1; r < rows; r++)
             {
-                if (grid[r, column].SlotType == grid[r - 1, column].SlotType)
+                if (board[r, column].SlotType == board[r - 1, column].SlotType)
                 {
                     count++;
                 }
@@ -83,7 +83,7 @@ namespace Kapibara.ConnectSlots
                     {
                         for (int k = 1; k <= count; k++)
                         {
-                            matches.Add(grid[r - k, column]);
+                            matches.Add(board[r - k, column]);
                         }
                     }
                     count = 1;
@@ -95,7 +95,7 @@ namespace Kapibara.ConnectSlots
             {
                 for (int k = 0; k < count; k++)
                 {
-                    matches.Add(grid[rows - 1 - k, column]);
+                    matches.Add(board[rows - 1 - k, column]);
                 }
             }
 
@@ -115,14 +115,14 @@ namespace Kapibara.ConnectSlots
         /// 6 7 8
         /// Returns: 3, 4, 5
         /// </summary>
-        public static List<T> GetRow<T>(T[,] grid, int row)
+        public static List<Slot> GetRow(Board board, int row)
         {
-            List<T> result = new List<T>();
-            for (int c = 0; c < grid.GetLength(1); c++)
+            List<Slot> result = new List<Slot>();
+            for (int c = 0; c < board.Columns; c++)
             {
-                if (InBounds(grid, row, c))
+                if (InBounds(board, row, c))
                 {
-                    result.Add(grid[row, c]);
+                    result.Add(board[row, c]);
                 }
             }
 
@@ -138,14 +138,14 @@ namespace Kapibara.ConnectSlots
         /// 6 7 8
         /// Returns: 2, 5, 8
         /// </summary>
-        public static List<T> GetColumn<T>(T[,] grid, int column)
+        public static List<Slot> GetColumn(Board board, int column)
         {
-            List<T> result = new List<T>();
-            for (int r = 0; r < grid.GetLength(0); r++)
+            List<Slot> result = new List<Slot>();
+            for (int r = 0; r < board.Rows; r++)
             {
-                if (InBounds(grid, r, column))
+                if (InBounds(board, r, column))
                 {
-                    result.Add(grid[r, column]);
+                    result.Add(board[r, column]);
                 }
             }
 
@@ -161,9 +161,9 @@ namespace Kapibara.ConnectSlots
         /// 6 7 8
         /// Neighbors of 4: 0, 1, 2, 3, 5, 6, 7, 8
         /// </summary>
-        public static List<T> GetNeighbors<T>(T[,] grid, int row, int column, int distance)
+        public static List<Slot> GetNeighbors(Board board, int row, int column, int distance)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
             for (int r = row - distance; r <= row + distance; r++)
             {
                 for (int c = column - distance; c <= column + distance; c++)
@@ -173,16 +173,16 @@ namespace Kapibara.ConnectSlots
                         continue;
                     }
 
-                    if (InBounds(grid, r, c))
+                    if (InBounds(board, r, c))
                     {
-                        result.Add(grid[r, c]);
+                        result.Add(board[r, c]);
                     }
                 }
             }
 
-            if (InBounds(grid, row, column))
+            if (InBounds(board, row, column))
             {
-                result.Add(grid[row, column]);
+                result.Add(board[row, column]);
             }
 
             return result;
@@ -198,9 +198,9 @@ namespace Kapibara.ConnectSlots
         /// Right neighbors: 3, 4
         /// Returned in order: left side, then right side.
         /// </summary>
-        public static List<T> GetNeighborsHorizontal<T>(T[,] grid, int row, int column, int distance = 3)
+        public static List<Slot> GetNeighborsHorizontal(Board board, int row, int column, int distance = 3)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
             for (int i = 0; i < Directions.HorizontalDirs.Length; i++)
             {
                 int deltaRow = Directions.HorizontalDirs[i].Item1;
@@ -211,16 +211,16 @@ namespace Kapibara.ConnectSlots
                     int newRow = row + deltaRow * d;
                     int newColumn = column + deltaColumn * d;
 
-                    if (InBounds(grid, newRow, newColumn))
+                    if (InBounds(board, newRow, newColumn))
                     {
-                        result.Add(grid[newRow, newColumn]);
+                        result.Add(board[newRow, newColumn]);
                     }
                 }
             }
 
-            if (InBounds(grid, row, column))
+            if (InBounds(board, row, column))
             {
-                result.Add(grid[row, column]);
+                result.Add(board[row, column]);
             }
 
             return result;
@@ -238,9 +238,9 @@ namespace Kapibara.ConnectSlots
         /// Down neighbors: 10
         /// Returned in order: upward first, then downward.
         /// </summary>
-        public static List<T> GetNeighborsVertical<T>(T[,] grid, int row, int column, int distance = 3)
+        public static List<Slot> GetNeighborsVertical(Board board, int row, int column, int distance = 3)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
             for (int i = 0; i < Directions.VerticalDirs.Length; i++)
             {
                 int deltaRow = Directions.VerticalDirs[i].Item1;
@@ -251,16 +251,16 @@ namespace Kapibara.ConnectSlots
                     int newRow = row + deltaRow * d;
                     int newColumn = column + deltaColumn * d;
 
-                    if (InBounds(grid, newRow, newColumn))
+                    if (InBounds(board, newRow, newColumn))
                     {
-                        result.Add(grid[newRow, newColumn]);
+                        result.Add(board[newRow, newColumn]);
                     }
                 }
             }
 
-            if (InBounds(grid, row, column))
+            if (InBounds(board, row, column))
             {
-                result.Add(grid[row, column]);
+                result.Add(board[row, column]);
             }
 
             return result;
@@ -275,9 +275,9 @@ namespace Kapibara.ConnectSlots
         /// 6 7 8
         /// Orthogonal neighbors of 4: 1 (up), 7 (down), 3 (left), 5 (right)
         /// </summary>
-        public static List<T> GetNeighborsOrthogonal<T>(T[,] grid, int row, int column, int distance = 1)
+        public static List<Slot> GetNeighborsOrthogonal(Board board, int row, int column, int distance = 1)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
             for (int i = 0; i < Directions.OrthogonalDirs.Length; i++)
             {
                 int deltaRow = Directions.OrthogonalDirs[i].Item1;
@@ -288,16 +288,16 @@ namespace Kapibara.ConnectSlots
                     int newRow = row + deltaRow * d;
                     int newColumn = column + deltaColumn * d;
 
-                    if (InBounds(grid, newRow, newColumn))
+                    if (InBounds(board, newRow, newColumn))
                     {
-                        result.Add(grid[newRow, newColumn]);
+                        result.Add(board[newRow, newColumn]);
                     }
                 }
             }
 
-            if (InBounds(grid, row, column))
+            if (InBounds(board, row, column))
             {
-                result.Add(grid[row, column]);
+                result.Add(board[row, column]);
             }
 
             return result;
@@ -312,9 +312,9 @@ namespace Kapibara.ConnectSlots
         /// 6 7 8
         /// Diagonal neighbors of 4: 0 (up-left), 2 (up-right), 6 (down-left), 8 (down-right)
         /// </summary>
-        public static List<T> GetNeighborsDiagonal<T>(T[,] grid, int row, int column, int distance = 1)
+        public static List<Slot> GetNeighborsDiagonal(Board board, int row, int column, int distance = 1)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
             for (int i = 0; i < Directions.DiagonalDirs.Length; i++)
             {
                 int deltaRow = Directions.DiagonalDirs[i].Item1;
@@ -325,25 +325,25 @@ namespace Kapibara.ConnectSlots
                     int newRow = row + deltaRow * d;
                     int newColumn = column + deltaColumn * d;
 
-                    if (InBounds(grid, newRow, newColumn))
+                    if (InBounds(board, newRow, newColumn))
                     {
-                        result.Add(grid[newRow, newColumn]);
+                        result.Add(board[newRow, newColumn]);
                     }
                 }
             }
 
-            if (InBounds(grid, row, column))
+            if (InBounds(board, row, column))
             {
-                result.Add(grid[row, column]);
+                result.Add(board[row, column]);
             }
 
             return result;
         }
 
-        public static List<T> CollectInDirection<T>(T[,] grid, int startRow, int startColumn, (int, int) direction,
+        public static List<Slot> CollectInDirection(Board board, int startRow, int startColumn, (int, int) direction,
             int maxDistance = 10)
         {
-            List<T> result = new List<T>();
+            List<Slot> result = new List<Slot>();
 
             int dRow = direction.Item1;
             int dCol = direction.Item2;
@@ -353,10 +353,10 @@ namespace Kapibara.ConnectSlots
                 int r = startRow + dRow * step;
                 int c = startColumn + dCol * step;
 
-                if (!InBounds(grid, r, c))
+                if (!InBounds(board, r, c))
                     break;
 
-                result.Add(grid[r, c]);
+                result.Add(board[r, c]);
             }
 
             return result;
@@ -365,10 +365,9 @@ namespace Kapibara.ConnectSlots
         /// <summary>
         /// Returns true if the given row and column are inside the bounds of the grid.
         /// </summary>
-        public static bool InBounds<T>(T[,] grid, int row, int column)
+        public static bool InBounds(Board board, int row, int column)
         {
-            return row >= 0 && row < grid.GetLength(0) &&
-                   column >= 0 && column < grid.GetLength(1);
+            return row >= 0 && row < board.Rows && column >= 0 && column < board.Columns;
         }
 
         #endregion
