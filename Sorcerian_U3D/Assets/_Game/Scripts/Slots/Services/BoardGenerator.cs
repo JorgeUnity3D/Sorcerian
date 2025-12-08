@@ -8,6 +8,7 @@ namespace Kapibara.ConnectSlots
     {
         [Inject] private Board _board;
         [Inject] private BoardConfig _boardConfig;
+        [Inject] private SlotSprites _slotSprites;
 
         public void GenerateBoardData()
         {
@@ -31,7 +32,7 @@ namespace Kapibara.ConnectSlots
         private Slot GenerateSlot(int row, int colum)
         {
             SlotType type = GetValidRandomType(row, colum);
-            Sprite sprite = _boardConfig.Sprites[type];
+            Sprite sprite = _slotSprites[type];
             Slot newSlot = new Slot(_boardConfig.Id, row, colum, type, sprite);
             _boardConfig.Id++;
             return newSlot;
@@ -40,7 +41,7 @@ namespace Kapibara.ConnectSlots
         private void RegenerateEmptySlotData(Slot slot)
         {
             SlotType type = RNG.PickOne<SlotType>();
-            Sprite sprite = _boardConfig.Sprites[type];
+            Sprite sprite = _slotSprites[type];
             slot.SlotType = type;
             slot.Sprite = sprite;
             slot.Id = _boardConfig.Id;
@@ -87,38 +88,38 @@ namespace Kapibara.ConnectSlots
             int id = 0;
             if (_boardConfig.Rows == 3)
             {
-                board[0, 0] = new Slot(id, 0, 0, SlotType.SLOT_EARTH, _boardConfig.Sprites[SlotType.SLOT_EARTH]);
-                board[0, 1] = new Slot(id, 0, 1, SlotType.SLOT_FIRE, _boardConfig.Sprites[SlotType.SLOT_FIRE]);
-                board[0, 2] = new Slot(id, 0, 2, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[1, 0] = new Slot(id, 1, 0, SlotType.SLOT_SWAMP, _boardConfig.Sprites[SlotType.SLOT_SWAMP]);
-                board[1, 1] = new Slot(id, 1, 1, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[1, 2] = new Slot(id, 1, 2, SlotType.SLOT_WIND, _boardConfig.Sprites[SlotType.SLOT_WIND]);
-                board[2, 0] = new Slot(id, 2, 0, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[2, 1] = new Slot(id, 2, 1, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[2, 2] = new Slot(id, 2, 2, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
+                board[0, 0] = new Slot(id, 0, 0, SlotType.SLOT_EARTH, _slotSprites[SlotType.SLOT_EARTH]);
+                board[0, 1] = new Slot(id, 0, 1, SlotType.SLOT_FIRE, _slotSprites[SlotType.SLOT_FIRE]);
+                board[0, 2] = new Slot(id, 0, 2, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[1, 0] = new Slot(id, 1, 0, SlotType.SLOT_SWAMP, _slotSprites[SlotType.SLOT_SWAMP]);
+                board[1, 1] = new Slot(id, 1, 1, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[1, 2] = new Slot(id, 1, 2, SlotType.SLOT_WIND, _slotSprites[SlotType.SLOT_WIND]);
+                board[2, 0] = new Slot(id, 2, 0, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[2, 1] = new Slot(id, 2, 1, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[2, 2] = new Slot(id, 2, 2, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
             }
 
             if (_boardConfig.Rows == 4)
             {
-                board[0, 0] = new Slot(id, 0, 0, SlotType.SLOT_EARTH, _boardConfig.Sprites[SlotType.SLOT_EARTH]);
-                board[0, 1] = new Slot(id, 0, 1, SlotType.SLOT_FIRE, _boardConfig.Sprites[SlotType.SLOT_FIRE]);
-                board[0, 2] = new Slot(id, 0, 2, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[0, 3] = new Slot(id, 0, 3, SlotType.SLOT_EARTH, _boardConfig.Sprites[SlotType.SLOT_EARTH]);
+                board[0, 0] = new Slot(id, 0, 0, SlotType.SLOT_EARTH, _slotSprites[SlotType.SLOT_EARTH]);
+                board[0, 1] = new Slot(id, 0, 1, SlotType.SLOT_FIRE, _slotSprites[SlotType.SLOT_FIRE]);
+                board[0, 2] = new Slot(id, 0, 2, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[0, 3] = new Slot(id, 0, 3, SlotType.SLOT_EARTH, _slotSprites[SlotType.SLOT_EARTH]);
 
-                board[1, 0] = new Slot(id, 1, 0, SlotType.SLOT_SWAMP, _boardConfig.Sprites[SlotType.SLOT_SWAMP]);
-                board[1, 1] = new Slot(id, 1, 1, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[1, 2] = new Slot(id, 1, 2, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[1, 3] = new Slot(id, 1, 3, SlotType.SLOT_WIND, _boardConfig.Sprites[SlotType.SLOT_WIND]);
+                board[1, 0] = new Slot(id, 1, 0, SlotType.SLOT_SWAMP, _slotSprites[SlotType.SLOT_SWAMP]);
+                board[1, 1] = new Slot(id, 1, 1, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[1, 2] = new Slot(id, 1, 2, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[1, 3] = new Slot(id, 1, 3, SlotType.SLOT_WIND, _slotSprites[SlotType.SLOT_WIND]);
 
-                board[2, 0] = new Slot(id, 2, 0, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[2, 1] = new Slot(id, 2, 1, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[2, 2] = new Slot(id, 2, 2, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[2, 3] = new Slot(id, 2, 3, SlotType.SLOT_EARTH, _boardConfig.Sprites[SlotType.SLOT_EARTH]);
+                board[2, 0] = new Slot(id, 2, 0, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[2, 1] = new Slot(id, 2, 1, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[2, 2] = new Slot(id, 2, 2, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[2, 3] = new Slot(id, 2, 3, SlotType.SLOT_EARTH, _slotSprites[SlotType.SLOT_EARTH]);
 
-                board[3, 0] = new Slot(id, 3, 0, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[3, 1] = new Slot(id, 3, 1, SlotType.SLOT_FOREST, _boardConfig.Sprites[SlotType.SLOT_FOREST]);
-                board[3, 2] = new Slot(id, 3, 2, SlotType.SLOT_WATER, _boardConfig.Sprites[SlotType.SLOT_WATER]);
-                board[3, 3] = new Slot(id, 3, 3, SlotType.SLOT_WIND, _boardConfig.Sprites[SlotType.SLOT_WIND]);
+                board[3, 0] = new Slot(id, 3, 0, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[3, 1] = new Slot(id, 3, 1, SlotType.SLOT_FOREST, _slotSprites[SlotType.SLOT_FOREST]);
+                board[3, 2] = new Slot(id, 3, 2, SlotType.SLOT_WATER, _slotSprites[SlotType.SLOT_WATER]);
+                board[3, 3] = new Slot(id, 3, 3, SlotType.SLOT_WIND, _slotSprites[SlotType.SLOT_WIND]);
             }
             
             return board;

@@ -59,8 +59,6 @@ namespace Kapibara.ConnectSlots
 
         private Vector3 CalculatePosition(int row, int column, Vector2 scaledSize)
         {
-            //Vector3 nextPos = _board[nextRow, slot.Column].SlotInstance.transform.localPosition;
-            // Position in grid
             return new Vector3(column * scaledSize.x, -row * scaledSize.y, 0);
         }
 
@@ -119,11 +117,13 @@ namespace Kapibara.ConnectSlots
                     int nextRow = currentRow + stepDir;
 
                     Sprite sprite = slot.SlotInstance.GetComponent<SpriteRenderer>().sprite;
-                    Vector2 scaledSize = new Vector2(sprite.bounds.size.x * _boardConfig.SizeX, sprite.bounds.size.y * _boardConfig.SizeY);
+                    Vector2 scaledSize = new Vector2(sprite.bounds.size.x * _boardConfig.SizeX,
+                        sprite.bounds.size.y * _boardConfig.SizeY);
                     Vector3 nextPos = CalculatePosition(nextRow, slot.Column, scaledSize);
 
                     sequence.Append(
-                        slot.SlotInstance.transform.DOLocalMove(nextPos, _boardConfig.MoveDuration).SetEase(Ease.OutQuad)
+                        slot.SlotInstance.transform.DOLocalMove(nextPos, _boardConfig.MoveDuration)
+                            .SetEase(Ease.OutQuad)
                     );
 
                     if (i < steps - 1)
@@ -200,13 +200,112 @@ namespace Kapibara.ConnectSlots
 
         #endregion
 
+        #region ANIMATIONS
+
+        public void ShakeSlots(List<Slot> slots, int repetitions = 2)
+        {
+            foreach (var slot in slots)
+            {
+                if (slot?.SlotInstance == null)
+                    continue;
+
+                var t = slot.SlotInstance.transform;
+                Sequence seq = DOTween.Sequence();
+
+                float shakeDistance = 0.12f;
+                float durationTotal = 0.35f;  // la duración total que quieras
+                float stepDuration = durationTotal / (repetitions * 3f);
+
+                Vector3 originalPos = t.localPosition;
+
+                Sequence gesture = DOTween.Sequence();
+                for (int i = 0; i < repetitions; i++)
+                {
+                    gesture.Append(t.DOLocalMoveX(originalPos.x + shakeDistance, stepDuration).SetEase(Ease.OutQuad))
+                        .Append(t.DOLocalMoveX(originalPos.x - shakeDistance, stepDuration).SetEase(Ease.OutQuad))
+                        .Append(t.DOLocalMoveX(originalPos.x, stepDuration * 0.5f).SetEase(Ease.OutQuad));
+                }
+
+                gesture.Join(t.DOLocalRotate(new Vector3(0, 0, 10f), durationTotal).SetEase(Ease.OutQuad))
+                    .Append(t.DOLocalRotate(new Vector3(0, 0, -10f), durationTotal).SetEase(Ease.OutQuad))
+                    .Append(t.DOLocalRotate(Vector3.zero, durationTotal * 0.5f).SetEase(Ease.OutQuad));
+
+                seq.Append(gesture)
+                    .SetUpdate(true)
+                    .OnComplete(() =>
+                    {
+                        t.localPosition = originalPos;
+                        t.localRotation = Quaternion.identity;
+                    });
+            }
+        }
+
+
+        #endregion
+
         #region DESTRUCTIONS
 
-        public void DestroySlot(Slot slot, UnityAction<Slot> OnDestroyAnimationComplete)
+        public void DestroySlotAnimation(Slot slot, int totalSlots, UnityAction<Slot> OnDestroyAnimationComplete)
         {
-            slot.SlotInstance.transform.DOShakeScale(0.35f, Random.Range(1, 3)).SetEase(Ease.OutQuad);
-            slot.SlotInstance.transform.DOScale(0, 0.35f).SetEase(Ease.OutQuad)
-                .OnComplete(() => OnDestroyAnimationComplete?.Invoke(slot));
+            // slot.SlotInstance.transform.DOShakeScale(0.35f, Random.Range(3, 5)).SetEase(Ease.OutQuad);
+            // slot.SlotInstance.transform.DOScale(0, 0.35f).SetEase(Ease.OutQuad)
+            //     .OnComplete(() => OnDestroyAnimationComplete?.Invoke(slot));
+            if (slot?.SlotInstance == null)
+                return;
+
+            Transform t = slot.SlotInstance.transform;
+
+            float baseDuration = 0.35f;
+            float intensity = Mathf.Clamp01((totalSlots - 3) / 7f); // 0 → suave, 1 → potente
+
+            float squashAmount = Mathf.Lerp(0.15f, 0.35f, intensity);
+            float shakePower = Mathf.Lerp(2f, 8f, intensity);
+            float preEffectDuration = Mathf.Lerp(0.12f, 0.22f, intensity);
+
+            Sequence seq = DOTween.Sequence();
+
+            // 1) Squash & Stretch inicial (impacto cartoon)
+            seq.Append(
+                t.DOScale(new Vector3(1 + squashAmount, 1 - squashAmount, 1), preEffectDuration)
+                    .SetEase(Ease.OutQuad)
+            );
+
+            // 2) Pequeña vibración horizontal según intensidad
+            seq.Join(
+                t.DOShakePosition(preEffectDuration, strength: shakePower * 0.05f, vibrato: 10, randomness: 90)
+            );
+
+            // 3) Vuelta suave antes de desaparecer
+            seq.Append(
+                t.DOScale(new Vector3(1 - squashAmount * 0.5f, 1 + squashAmount * 0.5f, 1), preEffectDuration)
+                    .SetEase(Ease.OutQuad)
+            );
+
+            // 4) Efecto final: scale to 0 (tu efecto original mejorado)
+            seq.Append(
+                t.DOScale(0, baseDuration)
+                    .SetEase(Ease.InBack) // más elegante que OutQuad para desaparecer
+            );
+
+            seq.OnComplete(() =>
+            {
+                OnDestroyAnimationComplete?.Invoke(slot);
+            });
+        }
+
+        public void DestroySlots()
+        {
+            for (int r = 0; r < _board.Rows; r++)
+            {
+                for (int c = 0; c < _board.Columns; c++)
+                {
+                    if (_board[r, c].IsDestroyed)
+                    {
+                        Destroy(_board[r, c].SlotInstance);
+                        _board[r, c] = null;
+                    }
+                }
+            }
         }
 
         #endregion

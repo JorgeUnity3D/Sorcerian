@@ -57,9 +57,7 @@ namespace Kapibara.ConnectSlots
 
                         if (hasMovement)
                         {
-                            //Slot targetSlot = _board[auxRow - slotsBelow - 1, c];
-                            movements.Add(new SlotMovement(slot, auxRow - slotsBelow - 1,
-                                c)); //,auxRow - slotsBelow - 1, c));
+                            movements.Add(new SlotMovement(slot, auxRow - slotsBelow - 1, c));
                         }
                     }
                 }

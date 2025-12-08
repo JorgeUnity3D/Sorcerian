@@ -16,6 +16,8 @@ Position: $BHJe76od66JMBt2qBGP1HY:1
 # sprite
 Position: $JpXK2AxuGnKAxHFg2JCw2h:0
 + [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 0
 
 # type
 Position: $LmvSDqytZ3xGXKG9x2FkGb:0

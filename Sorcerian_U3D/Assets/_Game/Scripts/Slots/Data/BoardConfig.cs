@@ -12,7 +12,6 @@ namespace Kapibara.ConnectSlots
         [SerializeField] private int _columns;
 
         //Instantiation
-        [SerializeField] private SlotSprites _slotSprites;
         [SerializeField] private GameObject _slotPrefab;
         [SerializeField] private Transform _slotsParent;
         [SerializeField] private float _sizeX;
@@ -43,11 +42,6 @@ namespace Kapibara.ConnectSlots
         }
 
         //Instantiation
-        public SlotSprites Sprites
-        {
-            get => _slotSprites;
-        } 
-
         public GameObject SlotPrefab
         {
             get => _slotPrefab;

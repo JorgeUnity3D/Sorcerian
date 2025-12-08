@@ -867,53 +867,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &933384903
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 933384905}
-  - component: {fileID: 933384906}
-  m_Layer: 0
-  m_Name: ConnectSlots
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &933384905
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933384903}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -187.11125, y: -977.2747, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &933384906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933384903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565deefdfc538799e9d7c53b831d168e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConnectSlots
-  _testRow: 0
-  _testColumn: 0
-  _testDistance: 0
 --- !u!1 &954475353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,31 +1699,8 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _slotSprites:
-  - {fileID: 21300000, guid: 3f88ed9d4b8bf872f847545adf71df7b, type: 3}
-  - {fileID: 21300000, guid: 1e8894a9409c950cc8e343e480a89211, type: 3}
-  - {fileID: 21300000, guid: c4601f7cf56eee9c0b363c62ae4d7eb7, type: 3}
-  - {fileID: 21300000, guid: 19ad3cae842a867c2929665541cbc8b5, type: 3}
-  - {fileID: 21300000, guid: 6a2ff6fa1ef779d238a840c4b43f6527, type: 3}
-  - {fileID: 21300000, guid: cbe7b64307ab90a82a498e7b1b64de2f, type: 3}
-  _boardConfig:
-    _rows: 7
-    _columns: 7
-    _sprites:
-    - {fileID: 21300000, guid: 3f88ed9d4b8bf872f847545adf71df7b, type: 3}
-    - {fileID: 21300000, guid: 1e8894a9409c950cc8e343e480a89211, type: 3}
-    - {fileID: 21300000, guid: c4601f7cf56eee9c0b363c62ae4d7eb7, type: 3}
-    - {fileID: 21300000, guid: 19ad3cae842a867c2929665541cbc8b5, type: 3}
-    - {fileID: 21300000, guid: 6a2ff6fa1ef779d238a840c4b43f6527, type: 3}
-    - {fileID: 21300000, guid: cbe7b64307ab90a82a498e7b1b64de2f, type: 3}
-    _slotPrefab: {fileID: 7176248737303728925, guid: 7e10c2acfd95bbad99e126154fafb0de, type: 3}
-    _slotsParent: {fileID: 954475354}
-    _sizeX: 1
-    _sizeY: 1
-    _moveDuration: 0.2
-    _stepDelay: 0.1
-    _testBoard: 0
-  _boardView: {fileID: 746332369}
+  _boardConfigData: {fileID: 11400000, guid: 1799013911a5aa8378a3de1c7a765847, type: 2}
+  _slotSpritesData: {fileID: 11400000, guid: 9bb5acf495d723259a2c6f3eb23609dd, type: 2}
 --- !u!4 &2147164521
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,7 +1833,6 @@ SceneRoots:
   - {fileID: 494276766}
   - {fileID: 826678847}
   - {fileID: 2147164521}
-  - {fileID: 933384905}
   - {fileID: 746332370}
   - {fileID: 954475354}
   - {fileID: 726264622}

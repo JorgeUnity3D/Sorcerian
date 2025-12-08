@@ -13,7 +13,7 @@ namespace Kapibara.ConnectSlots
         public UnityAction<Slot> OnFirstSlotSelected;
         public UnityAction<Slot> OnSecondSlotSelected;
         public UnityAction<Slot, Slot> OnSwapRequested;
-        public UnityAction OnSwapCancelled;
+        public UnityAction<Slot, Slot> OnSwapCancelled;
         
         public void OnSlotClicked(Slot clickedSlot)
         {
@@ -29,7 +29,7 @@ namespace Kapibara.ConnectSlots
             {
                 if (_firstSlot == clickedSlot)
                 {
-                    OnSwapCancelled?.Invoke();
+                    OnSwapCancelled?.Invoke(_firstSlot, clickedSlot);
                     ReleaseInput();
                     return;
                 }
@@ -49,6 +49,7 @@ namespace Kapibara.ConnectSlots
             }
             else
             {
+                OnSwapCancelled?.Invoke(_firstSlot, _secondSlot);
                 ReleaseInput();
             }
         }

@@ -6,27 +6,23 @@ namespace Kapibara.ConnectSlots
 {
     public class SlotsLifetimeScope : LifetimeScope
     {
-        [SerializeField] private BoardConfig _boardConfig;
-        [SerializeField] private BoardView _boardView;
+        [SerializeField] private BoardConfigData _boardConfigData;
+        [SerializeField] private SlotSpritesData _slotSpritesData;
         
         protected override void Configure(IContainerBuilder builder)
         {
-            /// --- datos / recursos ---
-            // 1) Board
-            Board board = new Board(new Slot[_boardConfig.Rows, _boardConfig.Columns]);
+            //Data
+            builder.RegisterInstance(_boardConfigData.Data).As<BoardConfig>();
+            builder.RegisterInstance(_slotSpritesData.Data).As<SlotSprites>();
+            Board board = new Board(new Slot[_boardConfigData.Data.Rows, _boardConfigData.Data.Columns]);
             builder.RegisterInstance(board).As<Board>();
             
-            // 2) Board Config
-            builder.RegisterInstance(_boardConfig).As<BoardConfig>();
-            
-            // --- MonoBehaviour views (resueltos desde jerarquía) ---
-            // BoardView debe estar en la escena; lo registramos para inyección.
-            builder.RegisterComponentInHierarchy(_boardView.GetType());
+            //Scene Monobehaviours
+            builder.RegisterComponentInHierarchy<BoardView>();
             //builder.RegisterComponentInHierarchy<SlotView>().AsSelf();
 
-            // --- Servicios / Sistemas: dejamos que VContainer los construya resolviendo constructores ---
-            // Tus clases tienen constructores del estilo: new BoardGenerator(board, rows, columns, sprites)
-            // VContainer hará eso si hemos registrado board, rows, columns, sprites arriba.
+            //Services
+            builder.Register<BoardController>(Lifetime.Singleton).AsSelf().As<IStartable>();
             builder.Register<BoardDestroyer>(Lifetime.Singleton).AsSelf();
             builder.Register<BoardGenerator>(Lifetime.Singleton).AsSelf();
             builder.Register<BoardGravity>(Lifetime.Singleton).AsSelf();
@@ -34,9 +30,9 @@ namespace Kapibara.ConnectSlots
             builder.Register<BoardMatcher>(Lifetime.Singleton).AsSelf();
             builder.Register<BoardRefiller>(Lifetime.Singleton).AsSelf();
             builder.Register<BoardSwapper>(Lifetime.Singleton).AsSelf();
+            builder.Register<BoardDebugger>(Lifetime.Singleton).AsSelf();
 
-            // --- Opcional: registrar el controller como consumidor para orchestrar (si quieres inyección allí) ---
-            builder.RegisterComponentInHierarchy<BoardController>();
+            //Controller
         }
     }
 }

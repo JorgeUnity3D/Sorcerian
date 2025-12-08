@@ -20,7 +20,7 @@ namespace Kapibara.ConnectSlots
             int destroyedCount = 0;
             foreach (Slot slot in slots)
             {
-                _boardView.DestroySlot(slot, s =>
+                _boardView.DestroySlotAnimation(slot, slots.Count, s =>
                 {
                     destroyedCount++;
                     OnSlotDestroyed?.Invoke(s);
