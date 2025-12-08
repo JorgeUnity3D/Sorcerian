@@ -1,0 +1,100 @@
+OVDF v1.0
+Kapibara.ConnectSlots.BoardConfig, Assembly-CSharp
+
+# $CiVusnGrc2UtUbFepjurqg
+Position: $MGrrsR5vq5Map5asVuqGGA:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $X6HkBYDGf2kpXiQyrPseUW
+Position: $CiVusnGrc2UtUbFepjurqg:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $AtQSGdih74KeY7MwbB4CdT
+Position: $CiVusnGrc2UtUbFepjurqg:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $5c6TVbiXoqSTZ85wsyUYFZ
+Position: $MLJHHfRX4kqKJHrnneVCuT:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $T4WvArTjJze1sYzn2Ahboj
+Position: $5c6TVbiXoqSTZ85wsyUYFZ:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $JfpDUbsj6UpaUkrA63eo2m
+Position: $5c6TVbiXoqSTZ85wsyUYFZ:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $QnTT8ryj8xSY5j8toy3Wda
+Position: $MLJHHfRX4kqKJHrnneVCuT:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $Lyqy4LbqQe4CJ8CXxHL2dp
+Position: $QnTT8ryj8xSY5j8toy3Wda:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $3PmdFAitqbWV4Yq1dSdUo2
+Position: $QnTT8ryj8xSY5j8toy3Wda:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $Pc8S1EFQGCXehFbcUKES7R
+Position: $HYbzUm7f7fhgdjJwzURX3y:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $AJyV5fW3nyBE1MocQBSgLJ
+Position: $Pc8S1EFQGCXehFbcUKES7R:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $QQzDeX4VvJRen5ReECiyYX
+Position: $Pc8S1EFQGCXehFbcUKES7R:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $MGrrsR5vq5Map5asVuqGGA
+Position: $root:1
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Data"
+
+# $MLJHHfRX4kqKJHrnneVCuT
+Position: $root:3
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Instantiate"
+
+# $HYbzUm7f7fhgdjJwzURX3y
+Position: $root:5
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Animations"
+
+# $PmQFzWCV74TyMQzZTXKV5S
+Position: $root
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Testing"
+
+# _columns
+Position: $AtQSGdih74KeY7MwbB4CdT:0
+
+# _rows
+Position: $X6HkBYDGf2kpXiQyrPseUW:0
+
+# _slotsParent
+Position: $JfpDUbsj6UpaUkrA63eo2m:0
+
+# _slotPrefab
+Position: $T4WvArTjJze1sYzn2Ahboj:0
+
+# _sizeY
+Position: $3PmdFAitqbWV4Yq1dSdUo2:0
+
+# _sizeX
+Position: $Lyqy4LbqQe4CJ8CXxHL2dp:0
+
+# _stepDelay
+Position: $QQzDeX4VvJRen5ReECiyYX:0
+
+# _moveDuration
+Position: $AJyV5fW3nyBE1MocQBSgLJ:0
+
+# _slotSprites
+Position: $MGrrsR5vq5Map5asVuqGGA:1
+
+# _testBoard
+Position: $PmQFzWCV74TyMQzZTXKV5S:0

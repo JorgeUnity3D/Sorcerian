@@ -1,0 +1,24 @@
+OVDF v1.0
+Kapibara.ConnectSlots.SlotSprite, Assembly-CSharp
+
+# $BHJe76od66JMBt2qBGP1HY
+Position: $root:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $LmvSDqytZ3xGXKG9x2FkGb
+Position: $BHJe76od66JMBt2qBGP1HY:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $JpXK2AxuGnKAxHFg2JCw2h
+Position: $BHJe76od66JMBt2qBGP1HY:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# sprite
+Position: $JpXK2AxuGnKAxHFg2JCw2h:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 0
+
+# type
+Position: $LmvSDqytZ3xGXKG9x2FkGb:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
