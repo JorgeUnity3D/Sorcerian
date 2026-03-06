@@ -11,6 +11,7 @@ namespace Kapibara.ConnectSlots
     {
         [Inject] private Board _board;
         [Inject] private BoardConfig _boardConfig;
+        [Inject] private ManaPrefabs _manaPrefabs;
 
         #region BOARD BUILDING
 
@@ -240,6 +241,44 @@ namespace Kapibara.ConnectSlots
             }
         }
 
+        public void PlayManaArcAnimation(Slot slot, ManaCounterView manaCounterView, Transform parent)
+        {
+            if (slot?.SlotInstance == null || manaCounterView == null)
+                return;
+
+            // WORLD POS start
+            Vector3 startPos = slot.SlotInstance.transform.position;
+
+            // Convert UI rect to world (Screen Space Overlay compatible)
+            RectTransform targetRect = manaCounterView.GetComponent<RectTransform>();
+            Vector3 endPos = targetRect.ConvertToWorldspacePositionCamera(manaCounterView.GetComponentInParent<Canvas>());
+
+            // Instantiate ORB PREFAB from ScriptableObject
+            GameObject prefab = _manaPrefabs[slot.SlotType];
+            if (prefab == null)
+            {
+                Debug.LogWarning($"[Mana Orb] No prefab found for {slot.SlotType}");
+                return;
+            }
+
+            GameObject orb = Instantiate(prefab, startPos, Quaternion.identity);
+            orb.transform.SetParent(parent);
+            
+            // ARC Path
+            Vector3 mid = (startPos + endPos) / 2f;
+            mid.y += 1.75f; // visible arc
+
+            Vector3[] path = { startPos, mid, endPos };
+
+            orb.transform.DOPath(path, 0.45f, PathType.CatmullRom)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    // OPTIONAL: pop animation on arrival
+                    orb.transform.DOScale(0f, 0.15f).SetEase(Ease.InBack);
+                    Destroy(orb, 0.15f);
+                });
+        }
 
         #endregion
 

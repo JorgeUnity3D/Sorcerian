@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5086384060269949467}
   - component: {fileID: 8340951149510423273}
   m_Layer: 5
-  m_Name: Counter_Holder
+  m_Name: CounterViewPF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

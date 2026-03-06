@@ -1,0 +1,22 @@
+OVDF v1.0
+Kapibara.ConnectSlots.ManaPrefab, Assembly-CSharp
+
+# $6E7k9APjZ4RKF6Wgd7ApKT
+Position: $root:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $9SHEd1xpYV681JorWBjDBX
+Position: $6E7k9APjZ4RKF6Wgd7ApKT:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $NpeCGhQVLiDBQp9J3i3ZRW
+Position: $6E7k9APjZ4RKF6Wgd7ApKT:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# _prefab
+Position: $NpeCGhQVLiDBQp9J3i3ZRW:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# _type
+Position: $9SHEd1xpYV681JorWBjDBX:0
++ [Sirenix.OdinInspector.HideLabelAttribute]

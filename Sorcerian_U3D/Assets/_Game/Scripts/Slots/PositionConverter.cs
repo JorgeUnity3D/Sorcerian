@@ -4,29 +4,78 @@ namespace Kapibara.ConnectSlots
 {
     public static class PositionConverter
     {
-        /// <summary>
-        /// Converts a world Transform position into a screen-space position compatible
-        /// with a Canvas in Screen Space - Overlay.
-        /// </summary>
-        /// <param name="transform">The world Transform.</param>
-        /// <returns>Screen-space position (Vector2) usable by UI RectTransforms.</returns>
+        // ----------------------------
+        // WORLD → SCREEN (Overlay)
+        // ----------------------------
         public static Vector2 ConvertToScreenSpaceOverlayCanvasPosition(this Transform transform)
         {
             return Camera.main.WorldToScreenPoint(transform.position);
         }
 
-        /// <summary>
-        /// Converts a RectTransform screen-space position (from a Screen Space - Overlay canvas)
-        /// to world-space coordinates using the main camera.
-        /// </summary>
-        /// <param name="rectTransform">The RectTransform in the UI.</param>
-        /// <param name="z">Z depth to use for world placement (usually target world object's Z).</param>
-        /// <returns>World-space position (Vector3).</returns>
-        public static Vector3 ConvertToWorldspacePosition(this RectTransform rectTransform, float z = 0f)
+        // ----------------------------
+        // WORLD → SCREEN (Camera Space Canvas → local UI coords)
+        // ----------------------------
+        public static Vector2 ConvertToScreenSpaceCameraCanvasPosition(
+            this Transform worldTransform,
+            Canvas targetCanvas)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldTransform.position);
+            RectTransform canvasRect = targetCanvas.GetComponent<RectTransform>();
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                screenPos,
+                targetCanvas.worldCamera,
+                out Vector2 localPos);
+
+            return localPos;
+        }
+
+        // ----------------------------
+        // UI (RectTransform) → WORLD (Overlay)
+        // ----------------------------
+        public static Vector3 ConvertToWorldspacePositionOverlay(this RectTransform rectTransform)
         {
             Vector3 screenPos = rectTransform.position;
-            screenPos.z = z; // Set desired depth in world
+            screenPos.z = -Camera.main.transform.position.z;
             return Camera.main.ScreenToWorldPoint(screenPos);
+        }
+
+        // ----------------------------
+        // UI (RectTransform) → WORLD (Camera Space Canvas)
+        // ----------------------------
+        public static Vector3 ConvertToWorldspacePositionCamera(
+            this RectTransform rectTransform,
+            Canvas canvas)
+        {
+            Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(
+                canvas.worldCamera,
+                rectTransform.position);
+
+            // camera planeDistance determines depth in world
+            float z = canvas.planeDistance;
+
+            Vector3 worldPos = canvas.worldCamera.ScreenToWorldPoint(
+                new Vector3(screenPos.x, screenPos.y, z));
+            return worldPos;
+        }
+
+        // ----------------------------
+        // SCREEN → Canvas localPoint helper
+        // ----------------------------
+        public static Vector2 ScreenToCanvasLocalPoint(
+            Vector2 screenPos,
+            Canvas canvas)
+        {
+            RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                screenPos,
+                canvas.worldCamera,
+                out Vector2 localPoint);
+
+            return localPoint;
         }
     }
 }

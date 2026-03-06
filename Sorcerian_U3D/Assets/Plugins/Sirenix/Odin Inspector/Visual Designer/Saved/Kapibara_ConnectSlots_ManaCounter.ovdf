@@ -1,0 +1,22 @@
+OVDF v1.0
+Kapibara.ConnectSlots.ManaCounter, Assembly-CSharp
+
+# $KrNhxsDhCHJEEZQbLzxTBC
+Position: $root:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $WX3JYuigFpH11ZP62UASv7
+Position: $KrNhxsDhCHJEEZQbLzxTBC:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $2DY9wy4tfpXALBhyVgdz6D
+Position: $KrNhxsDhCHJEEZQbLzxTBC:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# _manaCounterView
+Position: $2DY9wy4tfpXALBhyVgdz6D:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# _slotType
+Position: $WX3JYuigFpH11ZP62UASv7:0
++ [Sirenix.OdinInspector.HideLabelAttribute]

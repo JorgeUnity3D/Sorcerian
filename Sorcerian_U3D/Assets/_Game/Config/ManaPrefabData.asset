@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01676308cee44a5f848cefefa8ec6499, type: 3}
+  m_Name: ManaPrefabData
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.ManaPrefabsData
+  Data:
+    _slotPrefabs:
+    - _type: 0
+      _prefab: {fileID: 2328261232434692166, guid: 73006c39f5829b0918822e790e68f81f, type: 3}
+    - _type: 1
+      _prefab: {fileID: 2328261232434692166, guid: 69f08ac244490ff7088501d79c583161, type: 3}
+    - _type: 2
+      _prefab: {fileID: 2328261232434692166, guid: cd5317cb70ee4dd0e9ddbfb11bd8a7b9, type: 3}
+    - _type: 3
+      _prefab: {fileID: 2328261232434692166, guid: b89bc7ac040f7cc39964a010dd6ef2d2, type: 3}
+    - _type: 4
+      _prefab: {fileID: 2328261232434692166, guid: fbc9e454d8b8886248fa57a0f4e6e7d4, type: 3}
+    - _type: 5
+      _prefab: {fileID: 2328261232434692166, guid: 10e732b1bd7066350865a27ba1b0fe79, type: 3}

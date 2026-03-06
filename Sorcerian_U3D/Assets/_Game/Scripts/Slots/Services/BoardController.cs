@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using VContainer;
 using VContainer.Unity;
 
@@ -18,12 +19,15 @@ namespace Kapibara.ConnectSlots
         [Inject] private BoardGravity _boardGravity;
         [Inject] private BoardRefiller _boardRefiller;
         [Inject] private BoardDebugger _boardDebugger;
+        [Inject] private ManaCounterController _manaCounterController;
         
         [Inject] private Board _board;
         [Inject] private BoardConfig _boardConfig;
+        [Inject] private ManaCountersDescriptor _manaCountersDescriptor;
 
+        
         private List<Slot> _matches = new List<Slot>();
-
+ 
         public void Start()
         {
             _boardGenerator.GenerateBoardData();
@@ -32,7 +36,7 @@ namespace Kapibara.ConnectSlots
             _boardInputHandler.OnFirstSlotSelected += _boardView.HighlightSlot; 
             _boardInputHandler.OnSecondSlotSelected += _boardView.HighlightSlot;
             _boardInputHandler.OnSwapRequested += OnSwapRequested;
-            _boardInputHandler.OnSwapCancelled += OnSwapCancelled; //;
+            _boardInputHandler.OnSwapCancelled += OnSwapCancelled;
         }
 
         #region SWAP HANDLING
@@ -86,7 +90,15 @@ namespace Kapibara.ConnectSlots
         private void OnSlotDestroyed(Slot slot)
         {
             slot.IsDestroyed = true;
+
+            // Play arc
+            ManaCounterView view = _manaCountersDescriptor[slot.SlotType];
+            _boardView.PlayManaArcAnimation(slot, view, _manaCountersDescriptor.Parent);
+
+            // Add mana to counter
+            _manaCounterController.AddMana(slot.SlotType);
         }
+
 
         private void OnAllMatchesDestroyed()
         {

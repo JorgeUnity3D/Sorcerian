@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Wind_Counter_Holder
+      value: Wind_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -306,6 +306,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4673263085296323544, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
   m_PrefabInstance: {fileID: 202090980}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &202090982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 202090980}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
 --- !u!1 &219480110
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +383,107 @@ MonoBehaviour:
   m_Spacing: {x: 15, y: 5}
   m_Constraint: 2
   m_ConstraintCount: 3
+--- !u!1 &476154774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476154778}
+  - component: {fileID: 476154777}
+  - component: {fileID: 476154776}
+  - component: {fileID: 476154775}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &476154775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476154774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 55
+--- !u!114 &476154776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476154774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &476154777
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476154774}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &476154778
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476154774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &494276763
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Water_Counter_Holder
+      value: Water_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -648,6 +760,7 @@ GameObject:
   - component: {fileID: 726264621}
   - component: {fileID: 726264620}
   - component: {fileID: 726264619}
+  - component: {fileID: 726264623}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -704,8 +817,8 @@ Canvas:
   m_GameObject: {fileID: 726264618}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 494276765}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -732,6 +845,7 @@ RectTransform:
   m_Children:
   - {fileID: 1442748631}
   - {fileID: 2078366916}
+  - {fileID: 1198481898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -739,6 +853,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &726264623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726264618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b561628ae74fc98000c90ae830a3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.ManaCountersDescriptor
+  _parent: {fileID: 0}
+  _manaCounters:
+  - _slotType: 0
+    _manaCounterView: {fileID: 2842325916016418977}
+  - _slotType: 1
+    _manaCounterView: {fileID: 202090982}
+  - _slotType: 2
+    _manaCounterView: {fileID: 1371203591}
+  - _slotType: 3
+    _manaCounterView: {fileID: 895424729}
+  - _slotType: 4
+    _manaCounterView: {fileID: 1909206977}
+  - _slotType: 5
+    _manaCounterView: {fileID: 1612169059}
 --- !u!1 &746332368
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +917,7 @@ Transform:
   m_GameObject: {fileID: 746332368}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -187.11125, y: -977.2747, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -820,7 +960,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 000000003905bea27b2b627ab3e55800
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -867,6 +1007,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &895424729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 679110902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
 --- !u!1 &954475353
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +1143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Forest_Counter_Holder
+      value: Forest_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -1087,6 +1238,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1198481897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198481898}
+  m_Layer: 5
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1198481898
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198481897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 726264622}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1326061128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,7 +1285,7 @@ GameObject:
   - component: {fileID: 1326061131}
   - component: {fileID: 1326061130}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1313,7 +1499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Fire_Counter_Holder
+      value: Fire_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -1329,6 +1515,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4673263085296323544, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
   m_PrefabInstance: {fileID: 1371203589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1371203591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 1371203589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
 --- !u!1 &1442748630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Swamp_Counter_Holder
+      value: Swamp_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -1515,6 +1712,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4673263085296323544, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
   m_PrefabInstance: {fileID: 1612169057}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1612169059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 1612169057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
+--- !u!114 &1909206977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 975704414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
 --- !u!1 &1993604058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1821,7 @@ GameObject:
   - component: {fileID: 2078366918}
   - component: {fileID: 2078366917}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1701,6 +1920,8 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _boardConfigData: {fileID: 11400000, guid: 1799013911a5aa8378a3de1c7a765847, type: 2}
   _slotSpritesData: {fileID: 11400000, guid: 9bb5acf495d723259a2c6f3eb23609dd, type: 2}
+  _manaPrefabsData: {fileID: 11400000, guid: de3b5d9adbc77ffbe89ae96ef67c3487, type: 2}
+  _slotsParent: {fileID: 954475354}
 --- !u!4 &2147164521
 Transform:
   m_ObjectHideFlags: 0
@@ -1810,7 +2031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361424684103066200, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: m_Name
-      value: Earth_Counter_Holder
+      value: Earth_CounterView
       objectReference: {fileID: 0}
     - target: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
       propertyPath: _slotType
@@ -1826,6 +2047,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4673263085296323544, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
   m_PrefabInstance: {fileID: 2842325916016418975}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2842325916016418977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8340951149510423273, guid: 16b41fb6c7634f70fba05994b5147c3a, type: 3}
+  m_PrefabInstance: {fileID: 2842325916016418975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527b573da5e2054aae33981718b9a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Kapibara.ConnectSlots.CounterView
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1837,3 +2069,4 @@ SceneRoots:
   - {fileID: 954475354}
   - {fileID: 726264622}
   - {fileID: 1185131150}
+  - {fileID: 476154778}
