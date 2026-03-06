@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         // Realizar ataque (breve pausa)
         yield return new WaitForSeconds(_attackDuration);
 
-        // Volver a posici髇 original (m醩 recto)
+        // Volver a posici贸n original (m谩s recto)
         yield return StartCoroutine(MoveDirectly(character, originalPosition, _returnDuration));
 
         _isAttacking[characterIndex] = false;
@@ -142,10 +142,10 @@ public class GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
 
-            // Interpolaci髇 lineal en XZ
+            // Interpolaci贸n lineal en XZ
             Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, t);
 
-            // Curva de salto en Y (arco parab髄ico)
+            // Curva de salto en Y (arco parab贸lico)
             float verticalOffset = 0f;
             if (isJump)
             {
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // Asegurar posici髇 final exacta
+        // Asegurar posici贸n final exacta
         character.transform.position = targetPosition;
     }
 
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // Asegurar posici髇 final exacta
+        // Asegurar posici贸n final exacta
         character.transform.position = targetPosition;
     }
 }
